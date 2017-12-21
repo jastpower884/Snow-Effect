@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "jastzeonic.com.snoweffect"
+        applicationId "com.jastzeonic.snoweffect"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
