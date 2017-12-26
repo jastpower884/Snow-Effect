@@ -1,6 +1,7 @@
 package com.jastzeonic.snoweffect.view.item;
 
 import android.graphics.Paint;
+import android.graphics.Path;
 
 /**
  * The item which draw on canvas items.
@@ -10,28 +11,35 @@ import android.graphics.Paint;
 public abstract class AbstractItem {
 
     private Paint paint = new Paint();  // 繪製樣式物件
-    private int circlePointX = 0;
-    private int circlePointY = 0;
+    private Path path = new Path(); // 繪製路徑
+    private int pointX = 0;
+    private int pointY = 0;
     private int viewHeight = 0;
     private int viewWidth = 0;
 
     private boolean isDisplay = false;
 
+    AbstractItem() {
+        paint.setStrokeWidth(3.0f);
+        paint.setStyle(Paint.Style.STROKE);
 
-    public int getCirclePointX() {
-        return circlePointX;
     }
 
-    public void setCirclePointX(int circlePointX) {
-        this.circlePointX = circlePointX;
+
+    public int getPointX() {
+        return pointX;
     }
 
-    public int getCirclePointY() {
-        return circlePointY;
+    public void setPointX(int pointX) {
+        this.pointX = pointX;
     }
 
-    public void setCirclePointY(int circlePointY) {
-        this.circlePointY = circlePointY;
+    public int getPointY() {
+        return pointY;
+    }
+
+    public void setPointY(int pointY) {
+        this.pointY = pointY;
     }
 
     public int getViewHeight() {
@@ -67,5 +75,9 @@ public abstract class AbstractItem {
 
     public void setDisplay(boolean display) {
         isDisplay = display;
+    }
+
+    public Path getPath() {
+        return path;
     }
 }

@@ -1,12 +1,8 @@
 package com.jastzeonic.snoweffect.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.VectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
+ * The View for present the movement of image that we put.
  * Created by jast.lai on 21/12/2017.
  */
 public class EffectView extends View {
@@ -27,9 +24,8 @@ public class EffectView extends View {
 
     private List<AbstractItem> items = new ArrayList<>();
 
-
     private Random random = new Random();
-    VectorDrawable snowDrawable;
+    Drawable snowDrawable;
 
     public EffectView(Context context) {
         super(context);
@@ -37,14 +33,10 @@ public class EffectView extends View {
 
     public EffectView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        snowDrawable = getResources().getDrawable(R.drawable.ic_snowflake_01);
 
-
-        snowDrawable = ((VectorDrawable) getResources().getDrawable(R.drawable.ic_snowflake_01));
-
-        for (int i = 0; i < 75; i++) {
+        for (int i = 0; i < 30; i++) {
             items.add(new SnowItem());
-
-
         }
 
     }
@@ -66,7 +58,7 @@ public class EffectView extends View {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            int randomInteger = random.nextInt(3) + 3;
+            int randomInteger = random.nextInt(2) + 3;
             int index = 0;
 
             for (AbstractItem item : items) {
@@ -89,7 +81,7 @@ public class EffectView extends View {
 
         for (AbstractItem item : items) {
             if (item.isDisplay()) {
-                snowDrawable.setBounds(item.getCirclePointX(), item.getCirclePointY(), item.getCirclePointX() + item.getSize(), item.getCirclePointY() + item.getSize());
+                snowDrawable.setBounds(item.getPointX(), item.getPointY(), item.getPointX() + item.getSize(), item.getPointY() + item.getSize());
                 snowDrawable.draw(canvas);
                 item.fallDown();
                 item.drift();
@@ -97,8 +89,9 @@ public class EffectView extends View {
 
         }
 
-        postInvalidateDelayed(25);
+        postInvalidateDelayed(15);
 
 
     }
 }
+
